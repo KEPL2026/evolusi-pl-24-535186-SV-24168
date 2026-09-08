@@ -47,4 +47,4 @@ jobs:
           php artisan key:generate
 
       - name: Run Tests
-        run: php artisan test --pass-with-no-tests
+        run: php artisan test 
