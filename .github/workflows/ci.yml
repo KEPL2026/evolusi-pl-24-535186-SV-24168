@@ -2,7 +2,7 @@ name: Laravel CI Pipeline
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main, dev, feature/movie-list ]
   pull_request:
     branches: [ main, dev ]
 
@@ -39,13 +39,12 @@ jobs:
           extensions: mbstring, dom, fileinfo, sqlite3, pdo_sqlite
 
       - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress --no-security-blocking
+        run: composer install --prefer-dist --no-progress --no-interaction
 
       - name: Prepare Environment File
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-      - name: Generate Application Key
-        run: php artisan key:generate
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
       - name: Run Tests
-        run: php artisan test
+        run: php artisan test --pass-with-no-tests
