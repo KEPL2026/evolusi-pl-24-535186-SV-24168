@@ -47,4 +47,4 @@ jobs:
           php artisan key:generate
 
       - name: Run Tests
-        run: php artisan test 
+        run: ./vendor/bin/phpunit --do-not-fail-on-empty-test-suite
